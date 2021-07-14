@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">MediumCloneMvvmCoRoutinesV1.2</string>
+
+    <!--    Login -->
+    <string name="loginButtonText">Login</string>
+    <string name="testPasswordFieldHint">Use TestPass: 12345678</string>
+    <string name="testEmailFieldHint">Use TestEmail: ttest@gmail.com</string>
+    <string name="passwordFieldHint">Password</string>
+    <string name="emailFieldHint">Email</string>
+    <string name="usernameFieldHint">User Name</string>
+    <string name="invalidEmail">Please Enter Valid Email.</string>
+    <string name="invalidPassword">Password length must be 8 in characters.</string>
+
+    <!--    Create Article -->
+    <string name="articleTitleHint">Title</string>
+    <string name="articleDescriptionHint">Description</string>
+    <string name="articleBodyHint">Body</string>
+    <string name="createArticleBtnLabel">Create</string>
+    <string name="emptyArticleTitle">Please enter title.</string>
+    <string name="emptyArticleDescription">Please enter description.</string>
+    <string name="emptyArticleBody">Please enter body.</string>
+
+    <!--    Create Acccount -->
+    <string name="emptyUserName">Please Enter User Name.</string>
+    <string name="emptyEmail">Please Enter Email.</string>
+    <string name="emptyPassword">Please Enter Password.</string>
+    <string name="createAccountBtnText">Create Account</string>
+
+    <!--    Home -->
+    <string name="featureComingSoonLabel">This feature is coming soon.</string>
+    <string name="noPostsFoundLabel">No Posts Found!</string>
+
+    <!--    Article Details -->
+    <string name="slugIdNotFoundMessage">ArticleId not found.</string>
+
+
+    <string name="noNetworkConnectedError">You are not connected to internet. Please try to reconnect!</string>
+    <string name="generalError">Something went wrong!</string>
+    <string name="errorCode401Message">Token Expired!</string>
+    <string name="articleDetailsTitleText">Title</string>
+    <string name="articleDetailsDescText">Description</string>
+    <string name="articleDetailsBodyText">Body</string>
+    <string name="aboutAuthor">About Author</string>
+
+</resources>

@@ -5,9 +5,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.google.gson.GsonBuilder
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.response.ArticlesResponse
 import com.manapps.mandroid.mediumclonemvckotlin.data.repository.FeedArticlesRepository
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Article
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,15 +27,16 @@ class FeedArticlesViewModel(val repository: FeedArticlesRepository, val context:
     val feedArticlesLiveData: LiveData<Resource<ArticlesResponse>>
         get() = _feedArticlesLiveData
 
+    /** ROOM DATABASE */
+    val feedArticles: LiveData<List<Article>> = repository.getArticles().asLiveData()
+
 
     fun checkNetworkAndLoadFeedArticles() {
         if (NetworkHelper.isNetworkConnected(context)) {
             sendGetFeedArticlesRequest()
         } else {
             _isNetworkAvailable.postValue(false)
-            CoroutineScope(Dispatchers.IO).launch {
-                _feedArticlesLiveData.postValue(Resource.success(repository.getArticles()))
-            }
+
         }
     }
 
@@ -44,7 +47,8 @@ class FeedArticlesViewModel(val repository: FeedArticlesRepository, val context:
                 is ResultWrapper.GenericError -> setFeedArticlesError(response.error)
                 is ResultWrapper.Success -> {
                     if (response.value.isSuccessful) response.value.body()?.let {
-                        repository.insertArticles(it)
+                        repository.deleteAllArticles()
+                        repository.insertArticles(it.articles)
                         _feedArticlesLiveData.postValue(Resource.success(it))
                     }
                     else {

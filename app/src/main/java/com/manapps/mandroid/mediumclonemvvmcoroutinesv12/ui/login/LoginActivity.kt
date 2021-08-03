@@ -14,6 +14,7 @@ import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.R
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.repository.LoginRepository
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.articles.feedArticles.MainActivity
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.databinding.ActivityLoginBinding
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.articles.createArticles.afterTextChanged
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.signup.CreateAccountActivity
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.ViewModelProviderFactory
 
@@ -28,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         initViews()
         setUpViewModel()
         setUpObservers()
+
+        binding.emailEt.setText("ttest@gmail.com")
+        binding.passwordEt.setText("12345678")
         binding.loginBtn.setOnClickListener {
             viewModel.checkValidationsAndSendLoginRequest(
                 binding.emailEt.text.toString().trim(),

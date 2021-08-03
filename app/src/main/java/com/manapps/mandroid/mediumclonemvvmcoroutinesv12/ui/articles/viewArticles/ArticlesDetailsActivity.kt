@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
+import com.manapps.mandroid.mediumclonemvckotlin.extensions.loadImage
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Article
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.api.APIClinet
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.R
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.local.ArticlesDatabase
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.repository.ArticlesDetailsRepository
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.databinding.ActivityArticlesDetailsBinding
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.*
@@ -41,7 +43,7 @@ class ArticlesDetailsActivity : AppCompatActivity() {
             ViewModelProviders.of(
                 this,
                 ViewModelProviderFactory(ArticlesDetailsViewModel::class) {
-                    ArticlesDetailsViewModel(ArticlesDetailsRepository(APIClinet.authApi), this)
+                    ArticlesDetailsViewModel(ArticlesDetailsRepository(APIClinet.authApi, ArticlesDatabase.getInstance(this).articlesDao()),this)
                 }
             )
                 .get(ArticlesDetailsViewModel::class.java)
@@ -83,7 +85,7 @@ class ArticlesDetailsActivity : AppCompatActivity() {
     private fun setUpFeedArticlesView(articles: Article?) {
         try {
             articles?.let {
-                binding.authorTv.text = it.author.username
+                //binding.authorTv.text = it.author.username
                 binding.dateTv.text = DateUtils.convertStringDate(
                     it.createdAt,
                     Constants.InputDateFormate,
@@ -92,7 +94,8 @@ class ArticlesDetailsActivity : AppCompatActivity() {
                 binding.titleEt.setText(it.title)
                 binding.bodyEt.setText(it.body)
                 binding.descEt.setText(it.description)
-                binding.avatarImgView.loadImage(it.author.image, true)
+               // binding.avatarImgView.loadImage(it.author.image, true)
+
                 binding.titleEt.clearFocus()
             }
         } catch (exception: Exception) {

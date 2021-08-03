@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.local.dao.ArticleDao
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.local.typeConverter.ArticleTypeConverter
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Article
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.response.ArticlesResponse
 
-@Database(entities = [ArticlesResponse::class], version = 1,exportSchema = false)
-@TypeConverters(ArticleTypeConverter::class)
+@Database(entities = [Article::class], version = 1,exportSchema = false)
+//@TypeConverters(ArticleTypeConverter::class)
 abstract class ArticlesDatabase : RoomDatabase() {
     abstract fun articlesDao(): ArticleDao
     companion object {

@@ -46,26 +46,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         viewModel =
-                ViewModelProviders.of(
-                        this,
-                        ViewModelProviderFactory(FeedArticlesViewModel::class) {
-                            FeedArticlesViewModel(FeedArticlesRepository(APIClinet.authApi,ArticlesDatabase.getInstance(this).articlesDao()), this)
-                        }
-                )
-                        .get(FeedArticlesViewModel::class.java)
+            ViewModelProviders.of(
+                this,
+                ViewModelProviderFactory(FeedArticlesViewModel::class) {
+                    FeedArticlesViewModel(
+                        FeedArticlesRepository(
+                            APIClinet.authApi,
+                            ArticlesDatabase.getInstance(this).articlesDao()
+                        ), this
+                    )
+                }
+            )
+                .get(FeedArticlesViewModel::class.java)
     }
 
     private fun setUpObservers() {
+
+
+        viewModel.feedArticles.observe(this, {
+            it?.let {
+                setUpFeedArticlesView(it)
+            }
+        })
+
+
+
         viewModel.feedArticlesLiveData.observe(this, {
             it?.let {
                 when (it.status) {
                     ResultStatus.SUCCESS -> {
                         setProgressDialogDisable()
-                        setUpFeedArticlesView(it.data?.articles)
                     }
                     ResultStatus.ERROR -> {
                         setProgressDialogDisable()
-                        setErrorLayout(it.message)
+                        showError(it.message)
                     }
                     ResultStatus.LOADING -> {
                         setProgressDialogEnable()
@@ -76,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.isNetworkAvailable.observe(this, {
             if (!it) {
-                showSnackBar()
+               // showSnackBar()
             }
         })
 
@@ -118,9 +132,8 @@ class MainActivity : AppCompatActivity() {
         articlesAdapter.notifyDataSetChanged()
     }
 
-    private fun setErrorLayout(message: String?) {
-        setNoFeedArticlesViewsVisibility()
-        binding.subHeadingTv.text = message
+    private fun showError(message: String?) {
+        Utils.showMessage(this, message)
     }
 
     private fun setProgressDialogEnable() {
@@ -151,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-          //  R.id.profileMenuItem -> viewModel.gotoProfile() //need to add this feature soon.
+            //  R.id.profileMenuItem -> viewModel.gotoProfile() //need to add this feature soon.
             R.id.logoutMenuItem -> viewModel.logOutSession()
         }
         return super.onOptionsItemSelected(item)
@@ -159,14 +172,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSnackBar() {
         val snackbar: Snackbar = Snackbar
-                .make(binding.rootLayout, resources.getString(R.string.noNetworkConnectedError), Snackbar.LENGTH_INDEFINITE)
-                .setAction(Constants.Retry) {
-                    if (NetworkHelper.isNetworkConnected(this)) {
-                        viewModel.checkNetworkAndLoadFeedArticles()
-                    } else {
-                        showSnackBar()
-                    }
+            .make(
+                binding.rootLayout,
+                resources.getString(R.string.noNetworkConnectedError),
+                Snackbar.LENGTH_INDEFINITE
+            )
+            .setAction(Constants.Retry) {
+                if (NetworkHelper.isNetworkConnected(this)) {
+                    viewModel.checkNetworkAndLoadFeedArticles()
+                } else {
+                    showSnackBar()
                 }
+            }
         snackbar.setActionTextColor(Color.RED)
         snackbar.show()
     }

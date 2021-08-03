@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.manapps.mandroid.mediumclonemvckotlin.extensions.loadImage
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.Constants
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.Utils
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Article
@@ -31,10 +32,10 @@ class ArticlesAdapter(
         fun bind(article: Article) {
             try {
                 holderBinding.apply {
-                    authorTv.text = article.author.username
+//                    authorTv.text = article.author.username
                     titleTv.text = article.title
                     bodyDescTv.text = article.body
-                    avatarImgView.loadImage(article.author.image, true)
+//                    avatarImgView.loadImage(article.author.image, true)
                     dateTv.text = DateUtils.convertStringDate(article.createdAt,Constants.InputDateFormate,Constants.OutputDateFormate)
                 }
             } catch (exception: Exception) {

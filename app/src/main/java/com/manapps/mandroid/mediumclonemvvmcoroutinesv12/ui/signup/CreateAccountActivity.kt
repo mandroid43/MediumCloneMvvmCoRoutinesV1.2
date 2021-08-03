@@ -14,6 +14,7 @@ import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.R
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.repository.CreateAccountRepository
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.articles.feedArticles.MainActivity
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.databinding.ActivityCreateAccountBinding
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.articles.createArticles.afterTextChanged
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.ViewModelProviderFactory
 
 

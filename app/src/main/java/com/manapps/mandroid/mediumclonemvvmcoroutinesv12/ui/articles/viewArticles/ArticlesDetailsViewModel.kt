@@ -2,11 +2,11 @@ package com.manapps.mandroid.mediumclonemvvmcoroutinesv12.ui.articles.viewArticl
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.google.gson.GsonBuilder
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.R
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.local.dao.ArticleDao
+import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Article
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.response.ArticleResponse
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.repository.ArticlesDetailsRepository
 import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.utils.*
@@ -25,6 +25,9 @@ class ArticlesDetailsViewModel(val repository: ArticlesDetailsRepository, privat
     val articlesDetailsLiveData: LiveData<Resource<ArticleResponse>>
         get() = _articlesDetailsLiveData
 
+    /** ROOM DATABASE */
+    val feedArticles: LiveData<Article> = repository.getArticle("").asLiveData()
+
 
     fun checkSlugIdAndLoadArticleDetails(slugId: String?) {
         if (!slugId.isNullOrEmpty()) {
@@ -39,6 +42,9 @@ class ArticlesDetailsViewModel(val repository: ArticlesDetailsRepository, privat
     }
 
     fun sendGetFeedArticlesRequest(slugId: String) {
+
+
+
         CoroutineScope(Dispatchers.IO).launch {
             _articlesDetailsLiveData.postValue(Resource.loading(null))
             when (val response = repository.getArticleBySlug(slugId)) {

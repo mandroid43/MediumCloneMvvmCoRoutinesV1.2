@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                     FeedArticlesViewModel(
                         FeedArticlesRepository(
                             APIClinet.authApi,
-                            ArticlesDatabase.getInstance(this).articlesDao()
+                            ArticlesDatabase(this).articlesDao(),
+                            ArticlesDatabase(this).profileDao()
                         ), this
                     )
                 }

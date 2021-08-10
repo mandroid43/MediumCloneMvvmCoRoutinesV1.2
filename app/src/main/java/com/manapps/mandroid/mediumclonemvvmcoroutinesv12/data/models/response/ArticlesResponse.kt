@@ -12,7 +12,7 @@ import com.manapps.mandroid.mediumclonemvvmcoroutinesv12.data.models.entities.Ar
 data class ArticlesResponse(
 
 
-    public val id: Int = 0,
+    public val articlesCount: Int = 0,
 
 
 

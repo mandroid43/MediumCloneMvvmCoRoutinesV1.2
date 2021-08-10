@@ -43,7 +43,11 @@ class ArticlesDetailsActivity : AppCompatActivity() {
             ViewModelProviders.of(
                 this,
                 ViewModelProviderFactory(ArticlesDetailsViewModel::class) {
-                    ArticlesDetailsViewModel(ArticlesDetailsRepository(APIClinet.authApi, ArticlesDatabase.getInstance(this).articlesDao()),this)
+                    ArticlesDetailsViewModel(ArticlesDetailsRepository(
+                        APIClinet.authApi,
+                        ArticlesDatabase(this).articlesDao()),
+                        this
+                    )
                 }
             )
                 .get(ArticlesDetailsViewModel::class.java)
@@ -129,4 +133,27 @@ class ArticlesDetailsActivity : AppCompatActivity() {
         snackbar.setActionTextColor(Color.RED)
         snackbar.show()
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+
+
 }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 
-class ArticlesDetailsViewModel(val repository: ArticlesDetailsRepository, private val context: Context) : ViewModel() {
+class ArticlesDetailsViewModel ( val repository: ArticlesDetailsRepository, private val context: Context) : ViewModel() {
     private val _isNetworkAvailable = MutableLiveData<Boolean>()
     val isNetworkAvailable: LiveData<Boolean>
         get() = _isNetworkAvailable

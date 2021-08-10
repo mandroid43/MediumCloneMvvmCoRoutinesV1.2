@@ -19,12 +19,17 @@ class ArticlesDetailsActivity : AppCompatActivity() {
     private var slugId: String? = null
     private lateinit var viewModel: ArticlesDetailsViewModel
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBindings()
         getIntentData()
         setUpViewModel()
         setUpObservers()
+
+
     }
 
     private fun initBindings() {
@@ -129,4 +134,27 @@ class ArticlesDetailsActivity : AppCompatActivity() {
         snackbar.setActionTextColor(Color.RED)
         snackbar.show()
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+
+
 }

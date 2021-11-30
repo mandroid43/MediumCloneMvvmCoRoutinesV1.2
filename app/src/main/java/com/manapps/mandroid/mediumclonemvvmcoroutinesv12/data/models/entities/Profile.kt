@@ -5,7 +5,16 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 
+<<<<<<< HEAD
 @Entity
+=======
+//@Entity(foreignKeys = arrayOf(
+//    ForeignKey(entity = Article::class,
+//        parentColumns = arrayOf("id"),
+//        childColumns = arrayOf("user_id"),
+//        onDelete = ForeignKey.CASCADE)
+//))
+>>>>>>> origin/master
 data class Profile(
    @PrimaryKey(autoGenerate = true)
     val user_id: Int=0,

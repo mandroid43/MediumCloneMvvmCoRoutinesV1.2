@@ -19,12 +19,17 @@ class ArticlesDetailsActivity : AppCompatActivity() {
     private var slugId: String? = null
     private lateinit var viewModel: ArticlesDetailsViewModel
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBindings()
         getIntentData()
         setUpViewModel()
         setUpObservers()
+
+
     }
 
     private fun initBindings() {
